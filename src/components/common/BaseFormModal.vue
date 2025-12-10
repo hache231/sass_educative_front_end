@@ -321,10 +321,8 @@ function handleClose() {
   }
 }
 
-// Debug: Log when component is mounted
-
 onMounted(() => {
-  console.log('BaseFormModal mounted')
+  // Component mounted
 })
 
 function handleSubmit() {

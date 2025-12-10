@@ -20,7 +20,7 @@
       <!-- Navigation -->
       <nav class="sidebar-nav overflow-y-auto scrollbar-dark h-[calc(100vh-88px)]">
         <router-link
-          v-for="(item, index) in menuItems"
+          v-for="(item, index) in visibleMenuItems"
           :key="item.name"
           :to="{ name: item.name }"
           :class="[
@@ -248,28 +248,29 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { usePermissions } from '@/composables/usePermissions'
+import { MENU_ITEMS } from '@/constants/permissions'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
+const { canAccessRoute } = usePermissions()
 
 const sidebarCollapsed = ref(false)
 const showNotifications = ref(false)
 const showUserMenu = ref(false)
 
-const menuItems = [
-  { name: 'Dashboard', label: 'Tableau de bord', icon: 'home' },
-  { name: 'Students', label: 'Élèves', icon: 'user-graduate' },
-  { name: 'Teachers', label: 'Enseignants', icon: 'chalkboard-teacher' },
-  { name: 'Academics', label: 'Programmes', icon: 'book-open' },
-  { name: 'Assessments', label: 'Évaluations', icon: 'clipboard-check' },
-  { name: 'Schedules', label: 'Emploi du temps', icon: 'calendar-alt' },
-  { name: 'Finance', label: 'Finances', icon: 'wallet' },
-  { name: 'Communications', label: 'Communications', icon: 'comments' },
-  { name: 'Reports', label: 'Rapports', icon: 'chart-pie' },
-  { name: 'Documents', label: 'Documents', icon: 'folder-open' },
-  { name: 'Settings', label: 'Paramètres', icon: 'sliders-h' },
-]
+const menuItems = MENU_ITEMS
+
+// Filtrer les éléments du menu selon les permissions
+const visibleMenuItems = computed(() => {
+  return menuItems.filter(item => {
+    // Le Dashboard est toujours visible pour les utilisateurs authentifiés
+    if (item.name === 'Dashboard') return true
+    // Vérifier si l'utilisateur a la permission pour cet élément
+    return canAccessRoute(item.name)
+  })
+})
 
 const pageConfig = {
   Dashboard: { title: 'Tableau de bord', subtitle: 'Vue d\'ensemble de votre établissement' },

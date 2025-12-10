@@ -175,12 +175,12 @@ function viewReport(id) {
 }
 
 function downloadReport(id) {
-  console.log('Download report:', id)
+  // TODO: Implement download functionality
 }
 
 function deleteReport(id) {
   if (confirm('Supprimer ce rapport ?')) {
-    console.log('Delete report:', id)
+    // TODO: Implement delete functionality
   }
 }
 

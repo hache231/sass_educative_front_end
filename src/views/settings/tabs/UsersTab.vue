@@ -301,7 +301,6 @@ onMounted(async () => {
 function openUserModal() {
   selectedUser.value = null
   showUserModal.value = true
-  console.log('Opening user modal, showUserModal:', showUserModal.value)
 }
 
 async function loadUserRoles() {
