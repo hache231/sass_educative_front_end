@@ -1,42 +1,46 @@
 <template>
   <div class="space-y-6 animate-fade-in">
     <!-- Quick Stats -->
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-      <div class="stat-card stat-card-teal">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-teal">
-            <font-awesome-icon icon="file-alt" class="text-lg" />
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-6">
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="file-alt" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">{{ reportsStore.reports.length }}</p>
-        <p class="stat-label">Rapports générés</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">{{ reportsStore.reports.length }}</p>
+        <p class="text-sm text-slate-500 font-medium">Rapports générés</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-teal-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
-      <div class="stat-card stat-card-amber">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-amber">
-            <font-awesome-icon icon="user-graduate" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="user-graduate" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0</p>
-        <p class="stat-label">Rapports élèves</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0</p>
+        <p class="text-sm text-slate-500 font-medium">Rapports élèves</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
-      <div class="stat-card stat-card-sky">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-sky">
-            <font-awesome-icon icon="door-open" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center shadow-lg shadow-sky-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="door-open" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0</p>
-        <p class="stat-label">Rapports classes</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0</p>
+        <p class="text-sm text-slate-500 font-medium">Rapports classes</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-sky-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
-      <div class="stat-card stat-card-purple">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-purple">
-            <font-awesome-icon icon="chart-line" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="chart-line" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0</p>
-        <p class="stat-label">Analyses</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0</p>
+        <p class="text-sm text-slate-500 font-medium">Analyses</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
     </div>
     
@@ -49,10 +53,10 @@
     </div>
     
     <!-- Generated Reports -->
-    <div class="card p-0 overflow-hidden">
-      <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+    <div class="card p-0 overflow-hidden border-slate-200/60">
+      <div class="px-6 py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex items-center justify-between">
         <div>
-          <h3 class="text-lg font-semibold text-slate-800">Rapports générés</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-1">Rapports générés</h3>
           <p class="text-sm text-slate-500">Historique de vos rapports</p>
         </div>
         <div class="search-input w-64">

@@ -30,18 +30,18 @@
       <!-- Documents Tab -->
       <div v-if="activeTab === 'documents'" key="documents" class="space-y-4">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h3 class="text-lg font-semibold text-slate-800">Gestion des documents</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-1">Gestion des documents</h3>
             <p class="text-sm text-slate-500">Téléchargez et organisez vos documents</p>
           </div>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
             <font-awesome-icon icon="upload" />
             <span>Téléverser</span>
           </button>
         </div>
         
-        <div class="card p-0 overflow-hidden">
+        <div class="card p-0 overflow-hidden border-slate-200/60">
           <DocumentManager />
         </div>
       </div>
@@ -49,12 +49,12 @@
       <!-- Categories Tab -->
       <div v-else-if="activeTab === 'categories'" key="categories" class="space-y-4">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h3 class="text-lg font-semibold text-slate-800">Catégories de documents</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-1">Catégories de documents</h3>
             <p class="text-sm text-slate-500">Organisez vos documents par catégories</p>
           </div>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
             <font-awesome-icon icon="plus" />
             <span>Nouvelle catégorie</span>
           </button>
@@ -74,12 +74,12 @@
       <!-- Resources Tab -->
       <div v-else-if="activeTab === 'resources'" key="resources" class="space-y-4">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h3 class="text-lg font-semibold text-slate-800">Ressources externes</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-1">Ressources externes</h3>
             <p class="text-sm text-slate-500">Liens et ressources pédagogiques</p>
           </div>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
             <font-awesome-icon icon="plus" />
             <span>Ajouter une ressource</span>
           </button>

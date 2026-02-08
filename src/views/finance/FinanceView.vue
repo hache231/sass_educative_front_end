@@ -1,49 +1,53 @@
 <template>
   <div class="space-y-6 animate-fade-in">
     <!-- Stats Overview -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="stat-card stat-card-teal">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-teal">
-            <font-awesome-icon icon="wallet" class="text-lg" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="wallet" class="text-xl text-white" />
           </div>
-          <span class="stat-trend stat-trend-up">
-            <font-awesome-icon icon="arrow-up" class="text-xs" />
+          <div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+            <font-awesome-icon icon="arrow-up" class="text-[10px]" />
             <span>+8%</span>
-          </span>
-        </div>
-        <p class="stat-value text-2xl">0 €</p>
-        <p class="stat-label">Revenus totaux</p>
-      </div>
-      
-      <div class="stat-card stat-card-amber">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-amber">
-            <font-awesome-icon icon="clock" class="text-lg" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0 €</p>
-        <p class="stat-label">En attente</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0 €</p>
+        <p class="text-sm text-slate-500 font-medium">Revenus totaux</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-teal-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
       
-      <div class="stat-card stat-card-sky">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-sky">
-            <font-awesome-icon icon="check-circle" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="clock" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0 €</p>
-        <p class="stat-label">Paiements reçus</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0 €</p>
+        <p class="text-sm text-slate-500 font-medium">En attente</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
       
-      <div class="stat-card stat-card-purple">
-        <div class="flex items-start justify-between mb-3">
-          <div class="stat-icon stat-icon-purple">
-            <font-awesome-icon icon="exclamation-triangle" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 flex items-center justify-center shadow-lg shadow-sky-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="check-circle" class="text-xl text-white" />
           </div>
         </div>
-        <p class="stat-value text-2xl">0</p>
-        <p class="stat-label">Impayés</p>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0 €</p>
+        <p class="text-sm text-slate-500 font-medium">Paiements reçus</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-sky-100/50 to-transparent rounded-tl-full opacity-50"></div>
+      </div>
+      
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="exclamation-triangle" class="text-xl text-white" />
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-slate-800 mb-1">0</p>
+        <p class="text-sm text-slate-500 font-medium">Impayés</p>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
     </div>
     
@@ -93,31 +97,31 @@
     
     <!-- Preview Features -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="card hover:shadow-lg transition-shadow">
-        <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center mb-4">
+      <div class="group card hover:shadow-xl hover:border-teal-200 transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 text-white flex items-center justify-center mb-4 shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
           <font-awesome-icon icon="file-invoice-dollar" class="text-xl" />
         </div>
-        <h3 class="text-lg font-semibold text-slate-800 mb-2">Facturation</h3>
+        <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-teal-600 transition-colors">Facturation</h3>
         <p class="text-sm text-slate-600">
           Créez et envoyez des factures automatiquement aux parents et tuteurs.
         </p>
       </div>
       
-      <div class="card hover:shadow-lg transition-shadow">
-        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-4">
+      <div class="group card hover:shadow-xl hover:border-amber-200 transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center mb-4 shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
           <font-awesome-icon icon="credit-card" class="text-xl" />
         </div>
-        <h3 class="text-lg font-semibold text-slate-800 mb-2">Paiements en ligne</h3>
+        <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-amber-600 transition-colors">Paiements en ligne</h3>
         <p class="text-sm text-slate-600">
           Acceptez les paiements en ligne de manière sécurisée et pratique.
         </p>
       </div>
       
-      <div class="card hover:shadow-lg transition-shadow">
-        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
+      <div class="group card hover:shadow-xl hover:border-purple-200 transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 text-white flex items-center justify-center mb-4 shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
           <font-awesome-icon icon="chart-pie" class="text-xl" />
         </div>
-        <h3 class="text-lg font-semibold text-slate-800 mb-2">Analyses</h3>
+        <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-purple-600 transition-colors">Analyses</h3>
         <p class="text-sm text-slate-600">
           Visualisez les tendances et générez des rapports financiers détaillés.
         </p>
