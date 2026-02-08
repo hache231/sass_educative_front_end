@@ -54,18 +54,18 @@
      CARDS & SURFACES
      ========================================== */
   .card {
-    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm 
-           border border-white/60 p-6 
-           transition-all duration-300;
-  }
-  
-  .card:hover {
-    @apply shadow-md shadow-slate-200/50;
+    @apply bg-white rounded-2xl shadow-sm 
+           border border-slate-200/60 p-6 
+           transition-all duration-300 hover:shadow-lg hover:shadow-slate-200/50;
   }
   
   .card-elevated {
     @apply bg-white rounded-2xl shadow-lg shadow-slate-200/60 
            border border-slate-100 p-6;
+  }
+  
+  .card-interactive {
+    @apply card cursor-pointer hover:border-teal-200 hover:shadow-xl hover:shadow-teal-500/10;
   }
   
   .card-header {
@@ -250,7 +250,7 @@
      TABLES
      ========================================== */
   .table-container {
-    @apply overflow-x-auto rounded-xl border border-slate-200/60;
+    @apply overflow-x-auto rounded-2xl border border-slate-200/60 bg-white shadow-sm;
   }
   
   .table {
@@ -258,45 +258,51 @@
   }
   
   .table thead {
-    @apply bg-slate-50/80;
+    @apply bg-gradient-to-r from-slate-50 to-slate-100/50;
   }
   
   .table th {
-    @apply px-5 py-4 text-left text-xs font-bold text-slate-600 
-           uppercase tracking-wider border-b border-slate-200;
+    @apply px-6 py-4 text-left text-xs font-bold text-slate-700 
+           uppercase tracking-wider border-b border-slate-200/60;
   }
   
   .table td {
-    @apply px-5 py-4 text-sm text-slate-600 border-b border-slate-100;
+    @apply px-6 py-4 text-sm text-slate-700 border-b border-slate-100/60;
   }
   
   .table tbody tr {
-    @apply bg-white hover:bg-teal-50/30 transition-colors duration-150;
+    @apply bg-white hover:bg-gradient-to-r hover:from-teal-50/50 hover:to-transparent 
+           transition-all duration-200 border-b border-slate-100/60;
   }
   
   .table tbody tr:last-child td {
     @apply border-b-0;
   }
   
+  .table tbody tr:hover {
+    @apply shadow-sm;
+  }
+  
   /* ==========================================
      TABS
      ========================================== */
   .tabs {
-    @apply inline-flex gap-1 p-1.5 bg-slate-100/80 rounded-xl;
+    @apply inline-flex gap-1.5 p-1.5 bg-slate-100/80 rounded-xl border border-slate-200/60;
   }
   
   .tab {
     @apply flex items-center gap-2 px-5 py-2.5 rounded-lg 
-           text-sm font-medium transition-all duration-200
-           focus:outline-none focus:ring-2 focus:ring-teal-500/30;
+           text-sm font-semibold transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-teal-500/30
+           relative;
   }
   
   .tab-active {
-    @apply bg-white text-teal-700 shadow-sm;
+    @apply bg-white text-teal-700 shadow-md shadow-teal-500/10;
   }
   
   .tab-inactive {
-    @apply text-slate-600 hover:text-slate-800 hover:bg-white/50;
+    @apply text-slate-600 hover:text-slate-800 hover:bg-white/60;
   }
   
   /* ==========================================
