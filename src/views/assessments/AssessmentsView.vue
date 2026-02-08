@@ -30,12 +30,12 @@
       <!-- Assessments Tab -->
       <div v-if="activeTab === 'assessments'" key="assessments" class="space-y-6">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h2 class="text-xl font-bold text-slate-800">Gestion des évaluations</h2>
+            <h2 class="text-2xl font-bold text-slate-800 mb-1">Gestion des évaluations</h2>
             <p class="text-sm text-slate-500">Créez et planifiez les contrôles et examens</p>
           </div>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
             <font-awesome-icon icon="plus" />
             <span>Nouvelle évaluation</span>
           </button>
@@ -47,9 +47,9 @@
       <!-- Grades Tab -->
       <div v-else-if="activeTab === 'grades'" key="grades" class="space-y-6">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h2 class="text-xl font-bold text-slate-800">Saisie des notes</h2>
+            <h2 class="text-2xl font-bold text-slate-800 mb-1">Saisie des notes</h2>
             <p class="text-sm text-slate-500">Entrez et gérez les notes des élèves</p>
           </div>
         </div>
@@ -60,12 +60,12 @@
       <!-- Report Cards Tab -->
       <div v-else-if="activeTab === 'report-cards'" key="report-cards" class="space-y-6">
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
           <div>
-            <h2 class="text-xl font-bold text-slate-800">Bulletins scolaires</h2>
+            <h2 class="text-2xl font-bold text-slate-800 mb-1">Bulletins scolaires</h2>
             <p class="text-sm text-slate-500">Consultez et imprimez les bulletins</p>
           </div>
-          <button class="btn btn-secondary">
+          <button class="btn btn-secondary shadow-md hover:shadow-lg transition-shadow">
             <font-awesome-icon icon="print" />
             <span>Imprimer les bulletins</span>
           </button>
