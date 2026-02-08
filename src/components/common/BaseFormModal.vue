@@ -12,25 +12,25 @@
       ]"
     >
       <!-- Header -->
-      <div class="modal-header flex-shrink-0">
-        <div class="flex items-center gap-3">
+      <div class="modal-header flex-shrink-0 bg-gradient-to-r from-slate-50 to-white">
+        <div class="flex items-center gap-4">
           <div 
             v-if="icon"
             :class="[
-              'w-10 h-10 rounded-xl flex items-center justify-center',
-              iconBgClass || 'bg-teal-500 text-white'
+              'w-12 h-12 rounded-xl flex items-center justify-center shadow-lg',
+              iconBgClass || 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-teal-500/30'
             ]"
           >
-            <font-awesome-icon :icon="icon" />
+            <font-awesome-icon :icon="icon" class="text-lg" />
           </div>
           <div>
-            <h3 class="text-lg font-semibold text-slate-800">{{ title }}</h3>
-            <p v-if="subtitle" class="text-sm text-slate-500 mt-0.5">{{ subtitle }}</p>
+            <h3 class="text-xl font-bold text-slate-800">{{ title }}</h3>
+            <p v-if="subtitle" class="text-sm text-slate-500 mt-1">{{ subtitle }}</p>
           </div>
         </div>
         <button 
           @click="handleClose" 
-          class="btn-icon-sm btn-ghost text-slate-400 hover:text-slate-600"
+          class="btn-icon-sm btn-ghost text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
           :disabled="loading"
         >
           <font-awesome-icon icon="times" />
@@ -38,7 +38,7 @@
       </div>
       
       <!-- Progress Indicator (if tabs) -->
-      <div v-if="showTabs && tabs.length > 1" class="px-6 pt-2 pb-0 flex-shrink-0">
+      <div v-if="showTabs && tabs.length > 1" class="px-6 pt-4 pb-2 flex-shrink-0 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
         <div class="flex items-center gap-2 mb-4">
           <div 
             v-for="(tab, index) in tabs" 
@@ -47,9 +47,9 @@
           >
             <div 
               :class="[
-                'w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all',
+                'w-10 h-10 rounded-xl flex items-center justify-center text-xs font-semibold transition-all shadow-sm',
                 currentTabIndex >= index 
-                  ? 'bg-teal-500 text-white' 
+                  ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/30' 
                   : 'bg-slate-200 text-slate-500'
               ]"
             >
@@ -63,8 +63,8 @@
             <div 
               v-if="index < tabs.length - 1"
               :class="[
-                'w-12 h-0.5 mx-2 transition-all',
-                currentTabIndex > index ? 'bg-teal-500' : 'bg-slate-200'
+                'w-16 h-1 mx-3 rounded-full transition-all',
+                currentTabIndex > index ? 'bg-gradient-to-r from-teal-500 to-teal-600' : 'bg-slate-200'
               ]"
             ></div>
           </div>
@@ -134,12 +134,12 @@
         </div>
         
         <!-- Footer -->
-        <div class="modal-footer flex-shrink-0">
+        <div class="modal-footer flex-shrink-0 bg-gradient-to-r from-slate-50 to-white">
           <div class="flex items-center justify-between w-full">
             <button 
               type="button" 
               @click="handleClose" 
-              class="btn btn-secondary"
+              class="btn btn-secondary shadow-sm hover:shadow-md transition-shadow"
               :disabled="loading"
             >
               Annuler
@@ -149,7 +149,7 @@
                 v-if="showTabs && currentTabIndex > 0"
                 type="button"
                 @click="previousTab"
-                class="btn btn-outline"
+                class="btn btn-outline shadow-sm hover:shadow-md transition-shadow"
               >
                 <font-awesome-icon icon="chevron-left" />
                 <span>Précédent</span>
@@ -158,7 +158,7 @@
                 v-if="showTabs && currentTabIndex < tabs.length - 1"
                 type="button"
                 @click="nextTab"
-                class="btn btn-outline"
+                class="btn btn-outline shadow-sm hover:shadow-md transition-shadow"
                 :disabled="!canProceedToNext"
               >
                 <span>Suivant</span>
@@ -166,7 +166,7 @@
               </button>
               <button 
                 type="submit" 
-                class="btn btn-primary" 
+                class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30" 
                 :disabled="loading || (!isValid && validateOnSubmit)"
               >
                 <div v-if="loading" class="spinner spinner-sm border-white/30 border-t-white"></div>
@@ -184,6 +184,8 @@
 
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
+import { useErrorHandler } from '@/composables/useErrorHandler'
+import { useLoadingState } from '@/composables/useLoadingState'
 
 const props = defineProps({
   title: {
@@ -271,6 +273,25 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'submit', 'tab-change'])
 
+// Utiliser les composables pour la gestion d'erreurs et de chargement
+const { 
+  error: internalError, 
+  fieldErrors: internalFieldErrors,
+  handleApiError,
+  clearErrors 
+} = useErrorHandler()
+
+const { 
+  loading: internalLoading,
+  isLoading,
+  withLoading 
+} = useLoadingState()
+
+// Utiliser les props ou les valeurs internes
+const error = computed(() => props.error || internalError.value)
+const fieldErrors = computed(() => Object.keys(props.fieldErrors || {}).length > 0 ? props.fieldErrors : internalFieldErrors.value)
+const loading = computed(() => props.loading || internalLoading.value)
+
 const activeTab = ref(props.initialTab || (props.tabs.length > 0 ? props.tabs[0].id : ''))
 
 const sizeClasses = computed(() => {
@@ -316,7 +337,8 @@ function previousTab() {
 }
 
 function handleClose() {
-  if (!props.loading) {
+  if (!loading.value) {
+    clearErrors()
     emit('close')
   }
 }
