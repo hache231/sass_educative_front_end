@@ -1,50 +1,59 @@
 <template>
   <div class="space-y-6 animate-fade-in">
     <!-- Header Actions -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
       <div>
-        <h2 class="text-xl font-bold text-slate-800">Liste des enseignants</h2>
+        <h2 class="text-2xl font-bold text-slate-800 mb-1">Liste des enseignants</h2>
         <p class="text-sm text-slate-500">Gérez le personnel enseignant de votre établissement</p>
       </div>
-      <button @click="createNewTeacher" class="btn btn-primary">
+      <button @click="createNewTeacher" class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
         <font-awesome-icon icon="plus" />
         <span>Nouvel enseignant</span>
       </button>
     </div>
     
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div class="card flex items-center gap-4">
-        <div class="stat-icon stat-icon-teal">
-          <font-awesome-icon icon="chalkboard-teacher" class="text-lg" />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="chalkboard-teacher" class="text-xl text-white" />
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-slate-800 mb-1">{{ teachersStore.teachers.length }}</p>
+            <p class="text-sm text-slate-500 font-medium">Total enseignants</p>
+          </div>
         </div>
-        <div>
-          <p class="stat-value text-2xl">{{ teachersStore.teachers.length }}</p>
-          <p class="stat-label">Total enseignants</p>
-        </div>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-teal-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
-      <div class="card flex items-center gap-4">
-        <div class="stat-icon stat-icon-amber">
-          <font-awesome-icon icon="check-circle" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="check-circle" class="text-xl text-white" />
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-slate-800 mb-1">{{ activeTeachersCount }}</p>
+            <p class="text-sm text-slate-500 font-medium">Actifs</p>
+          </div>
         </div>
-        <div>
-          <p class="stat-value text-2xl">{{ activeTeachersCount }}</p>
-          <p class="stat-label">Actifs</p>
-        </div>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-amber-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
-      <div class="card flex items-center gap-4">
-        <div class="stat-icon stat-icon-purple">
-          <font-awesome-icon icon="book-reader" class="text-lg" />
+      <div class="group relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-200/60 p-6 hover:shadow-lg transition-all duration-300">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform duration-300">
+            <font-awesome-icon icon="book-reader" class="text-xl text-white" />
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-slate-800 mb-1">{{ totalClassesCount }}</p>
+            <p class="text-sm text-slate-500 font-medium">Classes assignées</p>
+          </div>
         </div>
-        <div>
-          <p class="stat-value text-2xl">{{ totalClassesCount }}</p>
-          <p class="stat-label">Classes assignées</p>
-        </div>
+        <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-100/50 to-transparent rounded-tl-full opacity-50"></div>
       </div>
     </div>
     
     <!-- Filters -->
-    <div class="filter-bar">
+    <div class="card mb-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="md:col-span-2">
           <label class="label">Rechercher</label>
@@ -76,7 +85,7 @@
     </div>
     
     <!-- Teachers Table -->
-    <div class="card p-0 overflow-hidden">
+    <div class="card p-0 overflow-hidden border-slate-200/60">
       <!-- Loading State -->
       <div v-if="teachersStore.loading" class="flex items-center justify-center py-20">
         <div class="spinner spinner-lg"></div>
@@ -177,17 +186,17 @@
                 <div class="flex items-center justify-end gap-2">
                   <button
                     @click="viewTeacher(teacher.id)"
-                    class="action-btn action-btn-view"
+                    class="action-btn action-btn-view group"
                     title="Voir le détail"
                   >
-                    <font-awesome-icon icon="eye" />
+                    <font-awesome-icon icon="eye" class="group-hover:scale-110 transition-transform" />
                   </button>
                   <button
                     @click="editTeacher(teacher.id)"
-                    class="action-btn action-btn-edit"
+                    class="action-btn action-btn-edit group"
                     title="Modifier"
                   >
-                    <font-awesome-icon icon="edit" />
+                    <font-awesome-icon icon="edit" class="group-hover:scale-110 transition-transform" />
                   </button>
                   <button
                     @click="deleteTeacher(teacher.id)"

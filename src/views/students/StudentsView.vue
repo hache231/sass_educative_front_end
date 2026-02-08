@@ -27,19 +27,19 @@
     <!-- Students Tab -->
     <div v-show="activeTab === 'students'" class="space-y-6">
       <!-- Header Actions -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
         <div>
-          <h2 class="text-xl font-bold text-slate-800">Liste des élèves</h2>
+          <h2 class="text-2xl font-bold text-slate-800 mb-1">Liste des élèves</h2>
           <p class="text-sm text-slate-500">Gérez les inscriptions et informations des élèves</p>
         </div>
-        <button @click="createNewStudent" class="btn btn-primary">
+        <button @click="createNewStudent" class="btn btn-primary shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30">
           <font-awesome-icon icon="plus" />
           <span>Nouvel élève</span>
         </button>
       </div>
       
       <!-- Filters -->
-      <div class="filter-bar">
+      <div class="card mb-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="md:col-span-1">
             <label class="label">Rechercher</label>
@@ -50,6 +50,7 @@
                 placeholder="Nom, prénom, ID..."
                 v-model="searchQuery"
                 @input="handleSearch"
+                class="input"
               />
             </div>
           </div>
@@ -84,7 +85,7 @@
       </div>
       
       <!-- Students Table -->
-      <div class="card p-0 overflow-hidden">
+      <div class="card p-0 overflow-hidden border-slate-200/60">
         <!-- Loading State -->
         <div v-if="studentsStore.loading" class="flex items-center justify-center py-20">
           <div class="spinner spinner-lg"></div>
@@ -184,24 +185,24 @@
                   <div class="flex items-center justify-end gap-2">
                     <button
                       @click="viewStudent(student)"
-                      class="action-btn action-btn-view"
+                      class="action-btn action-btn-view group"
                       title="Voir le détail"
                     >
-                      <font-awesome-icon icon="eye" />
+                      <font-awesome-icon icon="eye" class="group-hover:scale-110 transition-transform" />
                     </button>
                     <button
                       @click="editStudent(student)"
-                      class="action-btn action-btn-edit"
+                      class="action-btn action-btn-edit group"
                       title="Modifier"
                     >
-                      <font-awesome-icon icon="edit" />
+                      <font-awesome-icon icon="edit" class="group-hover:scale-110 transition-transform" />
                     </button>
                     <button
                       @click="deleteStudentConfirm(student)"
-                      class="action-btn action-btn-delete"
+                      class="action-btn action-btn-delete group"
                       title="Supprimer"
                     >
-                      <font-awesome-icon icon="trash" />
+                      <font-awesome-icon icon="trash" class="group-hover:scale-110 transition-transform" />
                     </button>
                   </div>
                 </td>
@@ -211,11 +212,29 @@
         </div>
         
         <!-- Pagination placeholder -->
-        <div v-if="studentsStore.filteredStudents.length > 0" class="px-5 py-4 border-t border-slate-100 bg-slate-50/50">
+        <div v-if="studentsStore.filteredStudents.length > 0" class="px-6 py-4 border-t border-slate-100 bg-gradient-to-r from-slate-50 to-white">
           <div class="flex items-center justify-between">
             <p class="text-sm text-slate-600">
-              Affichage de <span class="font-medium">{{ studentsStore.filteredStudents.length }}</span> élève(s)
+              Affichage de <span class="font-semibold text-slate-800">{{ studentsStore.filteredStudents.length }}</span> élève(s)
             </p>
+            <div class="flex items-center gap-2">
+              <button 
+                v-if="studentsStore.pagination.previous"
+                @click="loadPreviousPage"
+                class="btn btn-ghost btn-sm"
+              >
+                <font-awesome-icon icon="chevron-left" />
+                <span>Précédent</span>
+              </button>
+              <button 
+                v-if="studentsStore.pagination.next"
+                @click="loadNextPage"
+                class="btn btn-primary btn-sm"
+              >
+                <span>Suivant</span>
+                <font-awesome-icon icon="chevron-right" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -297,6 +316,7 @@ function clearFilters() {
 }
 
 function createNewStudent() {
+  console.log('Opening student modal')
   selectedStudent.value = null
   showStudentModal.value = true
 }
@@ -341,6 +361,18 @@ async function handleStudentSaved() {
 function handleEditFromDetail() {
   closeDetailModal()
   editStudent(selectedStudent.value)
+}
+
+async function loadNextPage() {
+  if (studentsStore.pagination.next) {
+    await studentsStore.fetchStudents({ page: studentsStore.pagination.page + 1 })
+  }
+}
+
+async function loadPreviousPage() {
+  if (studentsStore.pagination.previous && studentsStore.pagination.page > 1) {
+    await studentsStore.fetchStudents({ page: studentsStore.pagination.page - 1 })
+  }
 }
 
 function getInitials(name) {
