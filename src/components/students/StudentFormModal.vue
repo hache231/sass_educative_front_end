@@ -11,6 +11,7 @@
     :form="form"
     :is-valid="isValid"
     :is-edit="!!student"
+
     :show-tabs="true"
     :tabs="tabs"
     :initial-tab="activeTab"
@@ -283,6 +284,7 @@
 
 <script setup>
 import { ref, reactive, watch, computed, onMounted } from 'vue'
+import BaseFormModal from '@/components/common/BaseFormModal.vue'
 import { useStudentsStore } from '@/stores/students'
 import { useSettingsStore } from '@/stores/settings'
 
