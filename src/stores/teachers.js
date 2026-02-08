@@ -72,10 +72,21 @@ export const useTeachersStore = defineStore('teachers', () => {
     loading.value = true
     error.value = null
     try {
-      const response = await teachersApi.getTeachers({
+      // Inclure les paramètres de pagination si présents
+      const requestParams = {
         ...filters.value,
         ...params
-      })
+      }
+      
+      // S'assurer que les paramètres de pagination sont correctement formatés
+      if (pagination.value.page && !requestParams.page) {
+        requestParams.page = pagination.value.page
+      }
+      if (pagination.value.pageSize && !requestParams.page_size) {
+        requestParams.page_size = pagination.value.pageSize
+      }
+      
+      const response = await teachersApi.getTeachers(requestParams)
       
       // Gérer la pagination si présente
       if (response.data.results) {
@@ -84,8 +95,8 @@ export const useTeachersStore = defineStore('teachers', () => {
           count: response.data.count,
           next: response.data.next,
           previous: response.data.previous,
-          page: params.page || 1,
-          pageSize: params.page_size || 20
+          page: params.page || pagination.value.page || 1,
+          pageSize: params.page_size || pagination.value.pageSize || 20
         }
       } else {
         teachers.value = Array.isArray(response.data) ? response.data : []

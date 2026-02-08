@@ -70,10 +70,21 @@ export const useStudentsStore = defineStore('students', () => {
     loading.value = true
     error.value = null
     try {
-      const response = await studentsApi.getStudents({
+      // Inclure les paramètres de pagination si présents
+      const requestParams = {
         ...filters.value,
         ...params
-      })
+      }
+      
+      // S'assurer que les paramètres de pagination sont correctement formatés
+      if (pagination.value.page && !requestParams.page) {
+        requestParams.page = pagination.value.page
+      }
+      if (pagination.value.pageSize && !requestParams.page_size) {
+        requestParams.page_size = pagination.value.pageSize
+      }
+      
+      const response = await studentsApi.getStudents(requestParams)
       
       // Gérer la pagination si présente
       if (response.data.results) {
@@ -82,8 +93,8 @@ export const useStudentsStore = defineStore('students', () => {
           count: response.data.count,
           next: response.data.next,
           previous: response.data.previous,
-          page: params.page || 1,
-          pageSize: params.page_size || 20
+          page: params.page || pagination.value.page || 1,
+          pageSize: params.page_size || pagination.value.pageSize || 20
         }
       } else {
         students.value = Array.isArray(response.data) ? response.data : []

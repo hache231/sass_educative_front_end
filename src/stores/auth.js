@@ -6,6 +6,7 @@
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import axios from 'axios'
 import api from '@/api'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -53,10 +54,26 @@ export const useAuthStore = defineStore('auth', () => {
   }
   
   async function refreshAccessToken() {
+    // Vérifier que le refresh token existe
+    if (!refreshToken.value) {
+      logout()
+      throw new Error('No refresh token available')
+    }
+    
     try {
-      const response = await api.post('/auth/token/refresh/', {
+      // Utiliser axios directement (sans interceptors) pour éviter la boucle infinie
+      // Créer une instance axios séparée sans interceptors
+      const refreshApi = axios.create({
+        baseURL: '/api',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      const response = await refreshApi.post('/auth/token/refresh/', {
         refresh: refreshToken.value
       })
+      
       const { access } = response.data
       
       token.value = access
@@ -64,6 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
       
       return access
     } catch (error) {
+      // Si le refresh token est invalide, nettoyer et déconnecter
       logout()
       throw error
     }
