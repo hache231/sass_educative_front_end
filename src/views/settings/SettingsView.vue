@@ -1,17 +1,27 @@
 <template>
   <div class="space-y-6 animate-fade-in">
     <!-- Header avec description -->
-    <div class="card-gradient text-white">
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-teal-600 via-teal-500 to-emerald-600 p-8 text-white shadow-xl shadow-teal-500/20 mb-6">
       <div class="relative z-10">
-        <h1 class="text-2xl font-bold mb-2">Paramètres du Système</h1>
-        <p class="text-teal-100/90">
-          Configurez votre établissement, les utilisateurs, les rôles et les préférences
-        </p>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+            <font-awesome-icon icon="cog" class="text-xl" />
+          </div>
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold mb-1">Paramètres du Système</h1>
+            <p class="text-teal-50/90 text-sm md:text-base">
+              Configurez votre établissement, les utilisateurs, les rôles et les préférences
+            </p>
+          </div>
+        </div>
       </div>
+      <!-- Decorative elements -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
     </div>
     
     <!-- Tabs Navigation améliorée -->
-    <div class="flex flex-wrap gap-2 bg-white/80 backdrop-blur-sm rounded-2xl p-2 border border-slate-100">
+    <div class="flex flex-wrap gap-2 bg-white rounded-2xl p-2 border border-slate-200/60 shadow-sm mb-6">
       <button
         v-for="tab in tabs"
         :key="tab.id"
